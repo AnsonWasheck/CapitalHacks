@@ -266,7 +266,9 @@ thead th:nth-child(2),tbody td:nth-child(2){background:#0D0D0D;color:var(--yello
 .footer-links a,.footer-brand p,.footer-bottom{color:#A7B8AE}
 
 @media(max-width:900px){
-  .tracks-grid{grid-template-columns:1fr!important}
+  .tracks-grid{grid-template-columns:repeat(2,1fr)!important}
+  .tracks-grid .feature-card{min-height:auto;padding:22px}
+  .category-icon{width:44px;height:44px;margin-bottom:18px}
   .collab-window{height:430px}
   .project-card{left:10%;top:72px;width:80%;min-height:190px;padding:18px}
   .project-card h3{font-size:22px}
@@ -280,7 +282,7 @@ thead th:nth-child(2),tbody td:nth-child(2){background:#0D0D0D;color:var(--yello
 .ide-editor{position:absolute;top:44px;left:7%;right:7%;bottom:124px;background:#0C0C0C;border:1px solid #343434;font:10px/1.8 var(--m);overflow:hidden}
 .ide-tabs{height:31px;padding:8px 12px;background:#151515;border-bottom:1px solid #2D2D2D;display:flex;gap:18px;color:#858585}.ide-tabs b{color:#F5F5F0}.ide-tabs span:last-child{margin-left:auto;color:#73C9D6}
 .ide-code{display:grid;grid-template-columns:38px 1fr;padding:12px 0;color:#D8D8D4}.ide-code .line{color:#555;text-align:right;padding-right:12px;user-select:none}.ide-code code{font:inherit;white-space:pre}.ide-code i{color:#8E3A70;font-style:normal}.ide-code strong{color:#73C9D6}.ide-code em{color:#00A6A0;font-style:normal}.ide-code b{color:#C7A346;font-weight:400}
-.terminal{position:absolute;left:7%;right:7%;bottom:12px;height:100px;padding:10px 14px;background:#101010;border:1px solid #343434;font:9px/1.45 var(--m);color:#B6C0BD}.terminal>span{color:#777;letter-spacing:1px}.terminal p{margin:4px 0}.terminal p b{color:#00A6A0}.terminal p i{color:#73C9D6;font-style:normal}.terminal p strong{color:#00A6A0;font-weight:400}
+.terminal{position:absolute;left:7%;right:7%;bottom:12px;height:100px;padding:10px 14px;background:#101010;border:1px solid #343434;font:9px/1.45 var(--m);color:#B6C0BD;overflow:hidden}.terminal>span{display:block;color:#777;letter-spacing:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}.terminal p{margin:4px 0}.terminal p b{color:#00A6A0}.terminal p i{color:#73C9D6;font-style:normal}.terminal p strong{color:#00A6A0;font-weight:400}
 .cursor-teal{left:22%;top:55%}.cursor-purple{right:8%;top:35%}.cursor-blue{left:41%;top:76%}.cursor-gold{right:25%;bottom:30%}
 .logo-lockups{align-items:center}.logo-lockups b{min-width:115px;color:#F5F5F0!important;font:700 16px/0.85 var(--g)!important;text-align:left;letter-spacing:.5px!important}.logo-lockups small{font:700 8px var(--m);letter-spacing:2px}.carlsen-lockup{color:#00A6A0!important}.acm-lockup{color:#73C9D6!important}.sac-lockup{color:#F5F5F0!important}.cups-lockup{color:#C7A346!important}
 .winner-reel{padding:100px 0;background:#090909;overflow:hidden}.reel-heading{max-width:620px;margin:0 120px 42px}.reel-heading>span{font:700 12px var(--m);letter-spacing:3px;color:#00A6A0}.reel-heading h2{font-size:56px;line-height:1.05;letter-spacing:-1px;margin:16px 0}.reel-heading p{font:13px/1.6 var(--m);letter-spacing:1px;color:#B6C0BD}
