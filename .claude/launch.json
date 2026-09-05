@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "capital-hacks",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "4189", "--directory", "pixelcraft-static"],
+      "port": 4189
+    }
+  ]
+}

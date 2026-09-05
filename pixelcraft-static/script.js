@@ -47,21 +47,29 @@ renderFaq();
   const tabs=editor.querySelector('.ide-tabs');
   const originalLines=lines.map(line=>line.innerHTML);
   const sleep=ms=>new Promise(resolve=>setTimeout(resolve,reduceMotion?Math.min(ms,80):ms));
-  const homes={ALEX_K:[18,24],JIN_L:[31,142],SARA_M:[62,24],MILA_V:[77,142]};
+  /* Cursors are anchored to real code lines so they stay on target at every breakpoint. */
+  const collabLayer=editor.querySelector('.ide-collaborators');
+  const homes={ALEX_K:[18,0],JIN_L:[31,6],SARA_M:[62,1],MILA_V:[77,7]};
+  const placement={};
 
-  function move(name,left,top){
-    const cursor=cursors[name];
-    cursor.classList.add('is-working');
-    cursor.style.left=`${left}%`;
-    cursor.style.top=`${top}px`;
+  function topForLine(index){
+    const line=lines[index];
+    if(!line||!collabLayer)return 0;
+    return line.getBoundingClientRect().top-collabLayer.getBoundingClientRect().top;
   }
-  function home(name){
-    const [left,top]=homes[name];
+  function place(name,left,lineIndex,working){
     const cursor=cursors[name];
-    cursor.classList.remove('is-working');
+    if(!cursor)return;
+    placement[name]=[left,lineIndex,working];
+    cursor.classList.toggle('is-working',working);
     cursor.style.left=`${left}%`;
-    cursor.style.top=`${top}px`;
+    cursor.style.top=`${topForLine(lineIndex)}px`;
   }
+  function move(name,left,lineIndex){place(name,left,lineIndex,true);}
+  function home(name){const [left,lineIndex]=homes[name];place(name,left,lineIndex,false);}
+  window.addEventListener('resize',()=>{
+    Object.entries(placement).forEach(([name,[left,lineIndex,working]])=>place(name,left,lineIndex,working));
+  });
   function highlight(line,color){
     editor.querySelectorAll('.local-edit').forEach(item=>item.classList.remove('local-edit'));
     line.style.setProperty('--local-color',color);
@@ -80,7 +88,7 @@ renderFaq();
   }
 
   async function alex(){
-    move('ALEX_K',34,4);await sleep(650);
+    move('ALEX_K',34,3);await sleep(650);
     tabs.classList.add('show-model-tab');
     const model=['from impact import score, feasibility','','def evaluate(prototype):','  reach = score.people_helped(prototype)','  effort = feasibility.hours(prototype)','  return reach / max(effort, 1)','','evaluate(prototype="commons")','# model ready for team review'];
     lines.forEach((line,index)=>line.textContent=model[index]);
@@ -88,17 +96,17 @@ renderFaq();
     restore();await sleep(450);home('ALEX_K');
   }
   async function jin(){
-    move('JIN_L',51,72);await sleep(650);
+    move('JIN_L',51,3);await sleep(650);
     await typeSuffix(lines[3],', urgency="high"','#00A6A0');
     restore();await sleep(350);home('JIN_L');
   }
   async function sara(){
-    move('SARA_M',59,92);await sleep(650);
+    move('SARA_M',59,4);await sleep(650);
     await typeSuffix(lines[4],', feedback="live"','#B64A91');
     restore();await sleep(350);home('SARA_M');
   }
   async function mila(){
-    move('MILA_V',44,146);await sleep(650);
+    move('MILA_V',44,8);await sleep(650);
     const line=lines[8];
     const previous=line.textContent;
     highlight(line,'#C7A346');line.textContent='';
